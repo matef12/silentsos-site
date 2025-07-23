@@ -1,27 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SilentSOS - Live Location Viewer</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Live SOS Location</title>
   <style>
     body {
-      background: #000;
-      color: #fff;
-      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #1a1a1a;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       text-align: center;
-      padding: 80px 20px;
     }
-    a {
-      color: #00f2ff;
-      font-weight: bold;
-      font-size: 20px;
+    h1 {
+      font-size: 2rem;
+      color: #ff4081;
+    }
+    p {
+      font-size: 1.1rem;
+      margin: 1rem 2rem;
+    }
+    button {
+      background: #7C4DFF;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #651fff;
+    }
+    .small {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #999;
     }
   </style>
 </head>
 <body>
-  <h1>🚨 SilentSOS Live Location</h1>
-  <p>This live location can only be viewed inside the SilentSOS app.</p>
-  <p>Please install the app to continue:</p>
-  <p><a href="https://play.google.com/store/apps/details?id=com.yourapp.package">Install SilentSOS</a></p>
+  <h1>🚨 Live SOS Location</h1>
+  <p>You’ve been sent a SilentSOS emergency location.<br><br>
+     Tap the button below to open it in the app:</p>
+  <button onclick="openApp()">Open in SilentSOS</button>
+
+  <p class="small">Don’t have the app? You’ll be redirected to download it.</p>
+
+ <script>
+  function openApp() {
+    const fallbackLink = "https://play.google.com/store/apps/details?id=com.silentsos.app"; // Replace with your real app ID
+    const intentLink = "https://silentsos.live/track?uid=SENDER_UID"; // Will open ViewerDashboardActivity if app is installed
+
+    // Try to open the app
+    window.location.href = intentLink;
+
+    // Fallback to Play Store if app is not installed
+    setTimeout(() => {
+      window.location.href = fallbackLink;
+    }, 2000);
+  }
+</script>
+  
 </body>
 </html>
